@@ -1,27 +1,188 @@
-In this DevOps task, you need to build and deploy a full-stack CRUD application using the MEAN stack (MongoDB, Express, Angular 15, and Node.js). The backend will be developed with Node.js and Express to provide REST APIs, connecting to a MongoDB database. The frontend will be an Angular application utilizing HTTPClient for communication.  
+# MEAN Stack CRUD Application
 
-The application will manage a collection of tutorials, where each tutorial includes an ID, title, description, and published status. Users will be able to create, retrieve, update, and delete tutorials. Additionally, a search box will allow users to find tutorials by title.
+## Project Overview
 
-## Project setup
+This project is a Dockerized MEAN (MongoDB, Express, Angular, Node.js) stack CRUD application.  
+It consists of an Angular frontend, a Node.js/Express backend API, MongoDB database, and Nginx as a reverse proxy.  
+The entire application is containerized using Docker and managed with Docker Compose.
 
-### Node.js Server
+------------------------------------------------------------
 
-cd backend
+## Technologies Used
 
-npm install
+Frontend:
+- Angular
 
-You can update the MongoDB credentials by modifying the `db.config.js` file located in `app/config/`.
+Backend:
+- Node.js
+- Express
 
-Run `node server.js`
+Database:
+- MongoDB
 
-### Angular Client
+Infrastructure:
+- Docker
+- Docker Compose
+- Nginx
 
-cd frontend
+CI/CD:
+- GitHub Actions (or configured CI pipeline)
 
-npm install
+------------------------------------------------------------
 
-Run `ng serve --port 8081`
+## Project Structure
 
-You can modify the `src/app/services/tutorial.service.ts` file to adjust how the frontend interacts with the backend.
+backend/        -> Express API  
+frontend/       -> Angular application  
+nginx/          -> Nginx configuration  
+docker-compose.yml  
+README.md  
 
-Navigate to `http://localhost:8081/`
+------------------------------------------------------------
+
+## Prerequisites
+
+Make sure the following are installed:
+
+- Git
+- Docker
+- Docker Compose
+
+Check versions:
+
+docker --version
+docker-compose --version
+
+------------------------------------------------------------
+
+## Running the Application Locally (Docker)
+
+1. Clone the repository:
+
+git clone <your-repository-url>
+cd <project-folder>
+
+2. Build and start containers:
+
+docker-compose up --build -d
+
+3. Verify containers are running:
+
+docker ps
+
+4. Access the application:
+
+Frontend:
+http://localhost
+
+Backend API:
+http://localhost/api/tutorials
+
+5. Stop the application:
+
+docker-compose down
+
+------------------------------------------------------------
+
+## AWS EC2 Deployment Steps
+
+1. Launch an Ubuntu EC2 instance.
+2. Configure Security Group:
+   - Allow SSH (Port 22)
+   - Allow HTTP (Port 80)
+
+3. Connect via SSH:
+
+ssh ubuntu@<your-ec2-public-ip>
+
+4. Install Docker:
+
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker ubuntu
+
+Logout and login again.
+
+5. Install Docker Compose:
+
+sudo apt install docker-compose -y
+
+Verify installation:
+
+docker-compose --version
+
+6. Clone the repository:
+
+git clone <your-repository-url>
+cd <project-folder>
+
+7. Build and start containers:
+
+docker-compose up --build -d
+
+8. Open in browser:
+
+http://<your-ec2-public-ip>
+
+------------------------------------------------------------
+
+## API Endpoint
+
+Base URL:
+
+/api/tutorials
+
+Supported operations:
+
+GET    /api/tutorials
+GET    /api/tutorials/:id
+POST   /api/tutorials
+PUT    /api/tutorials/:id
+DELETE /api/tutorials/:id
+
+------------------------------------------------------------
+
+## CI/CD Configuration
+
+The repository includes CI/CD configuration to automatically build and validate the Docker setup on every push to the main branch.
+
+The pipeline performs:
+- Code checkout
+- Docker image build validation
+- Docker Compose validation
+
+CI configuration files are located in:
+
+.github/workflows/
+
+------------------------------------------------------------
+
+## Troubleshooting
+
+Rebuild containers:
+
+docker-compose up --build -d
+
+View logs:
+
+docker logs backend
+docker logs nginx
+
+Stop all containers:
+
+docker-compose down
+
+------------------------------------------------------------
+
+## Submission
+
+This repository contains:
+
+- All Dockerfiles
+- docker-compose.yml
+- Nginx configuration
+- Complete source code
+- CI/CD configuration
+- Setup and deployment documentation
