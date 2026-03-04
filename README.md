@@ -72,11 +72,9 @@ docker ps
 
 4. Access the application:
 
-Frontend:
-http://localhost
-
-Backend API:
-http://localhost/api/tutorials
+1. Frontend: Open your browser and go to http://localhost:4200 after running `docker-compose up`.
+2. Backend API: Use http://localhost:5000/api/tutorials for API requests.
+Note: These URLs work **only after running the Docker containers locally**. If the EC2 instance is stopped, public URLs will not be accessible.
 
 5. Stop the application:
 
